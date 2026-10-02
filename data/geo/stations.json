@@ -1,0 +1,121 @@
+{
+ "8531680": {
+  "key": "sandy_hook_nj",
+  "name": "Sandy Hook",
+  "state": "NJ",
+  "lat": 40.4669,
+  "lon": -74.0094
+ },
+ "8534720": {
+  "key": "atlantic_city_nj",
+  "name": "Atlantic City",
+  "state": "NJ",
+  "lat": 39.356667,
+  "lon": -74.41805
+ },
+ "8536110": {
+  "key": "cape_may_nj",
+  "name": "Cape May",
+  "state": "NJ",
+  "lat": 38.9683,
+  "lon": -74.96
+ },
+ "8557380": {
+  "key": "lewes_de",
+  "name": "Lewes",
+  "state": "DE",
+  "lat": 38.782833,
+  "lon": -75.11928
+ },
+ "8570283": {
+  "key": "ocean_city_md",
+  "name": "Ocean City Inlet",
+  "state": "MD",
+  "lat": 38.32833,
+  "lon": -75.09167
+ },
+ "8573364": {
+  "key": "tolchester_beach_md",
+  "name": "Tolchester Beach",
+  "state": "MD",
+  "lat": 39.213444,
+  "lon": -76.24455
+ },
+ "8575512": {
+  "key": "annapolis_md",
+  "name": "Annapolis",
+  "state": "MD",
+  "lat": 38.983883,
+  "lon": -76.480034
+ },
+ "8571892": {
+  "key": "cambridge_md",
+  "name": "Cambridge",
+  "state": "MD",
+  "lat": 38.5725,
+  "lon": -76.06167
+ },
+ "8571421": {
+  "key": "bishops_head_md",
+  "name": "Bishops Head",
+  "state": "MD",
+  "lat": 38.22,
+  "lon": -76.0383
+ },
+ "8577330": {
+  "key": "solomons_md",
+  "name": "Solomons Island",
+  "state": "MD",
+  "lat": 38.3167,
+  "lon": -76.4517
+ },
+ "8635750": {
+  "key": "lewisetta_va",
+  "name": "Lewisetta",
+  "state": "VA",
+  "lat": 37.9961,
+  "lon": -76.4644
+ },
+ "8636580": {
+  "key": "windmill_point_va",
+  "name": "Windmill Point",
+  "state": "VA",
+  "lat": 37.6155,
+  "lon": -76.28978
+ },
+ "8637689": {
+  "key": "yorktown_va",
+  "name": "Yorktown USCG Training Center",
+  "state": "VA",
+  "lat": 37.2265,
+  "lon": -76.478806
+ },
+ "8631044": {
+  "key": "wachapreague_va",
+  "name": "Wachapreague",
+  "state": "VA",
+  "lat": 37.607777,
+  "lon": -75.68584
+ },
+ "8632200": {
+  "key": "kiptopeke_va",
+  "name": "Kiptopeke",
+  "state": "VA",
+  "lat": 37.1652,
+  "lon": -75.9884
+ },
+ "8638610": {
+  "key": "sewells_point_va",
+  "name": "Sewells Point",
+  "state": "VA",
+  "lat": 36.94278,
+  "lon": -76.32861
+ },
+ "8651370": {
+  "key": "duck_nc",
+  "name": "Duck",
+  "state": "NC",
+  "lat": 36.1833,
+  "lon": -75.7467
+ }
+}
