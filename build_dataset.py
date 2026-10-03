@@ -4,6 +4,7 @@ Steps
   1. Hourly -> daily (or weekly) means on a complete, gap-free calendar index.
      A day only counts if >= 18 of its 24 hourly readings exist. Observed
      high/low tides give each day's MHHW, MHW, MLW and MLLW.
+     Regional (*_midatlantic) averages are added after gap filling.
   2. Drop any column with < MIN_COVERAGE of days present.
   3. Fill short gaps (<= MAX_GAP steps) by time interpolation; longer gaps
      stay NaN so they're visible and not interpolated.
@@ -26,6 +27,8 @@ START, END = "2005-01-01", "2025-12-31"
 MIN_HOURS_PER_DAY = 18
 MIN_COVERAGE = 0.85
 MAX_GAP = {"D": 7, "W": 2}
+REGIONAL_LEVELS = ("mhhw", "mhw", "msl", "mlw", "mllw", "surge")
+MIN_REGIONAL_STATIONS = 12
 
 
 def load(product, name):
@@ -96,6 +99,28 @@ def build_daily():
     return pd.DataFrame({k: v.reindex(idx) for k, v in cols.items()})
 
 
+def add_regional(df):
+    """Mid-Atlantic average of each tide level across all water-level stations.
+
+    A plain mean would jump whenever a station drops out, because stations sit
+    at different levels (MHHW is ~0.8 m above MSL at Sandy Hook but ~0.2 m at
+    Annapolis). So each station is first expressed as an anomaly from its own
+    2005-2025 mean, the anomalies are averaged over the stations reporting that
+    day, and the average of the station means is added back. With every station
+    present this equals the plain mean. Days with fewer than
+    MIN_REGIONAL_STATIONS stations reporting are left NaN.
+    """
+    for lvl in REGIONAL_LEVELS:
+        block = df[[f"{lvl}_{n}" for n in WL_STATIONS.values() if f"{lvl}_{n}" in df]]
+        station_means = block.mean()
+        n = block.notna().sum(axis=1)
+        regional = station_means.mean() + (block - station_means).mean(axis=1)
+        df[f"{lvl}_midatlantic"] = regional.where(n >= MIN_REGIONAL_STATIONS)
+        if lvl == "msl":
+            df["n_stations_midatlantic"] = n
+    return df
+
+
 def main():
     freq = sys.argv[1].upper() if len(sys.argv) > 1 else "D"
     df = build_daily()
@@ -111,6 +136,7 @@ def main():
 
     filled = df.interpolate(method="time", limit=MAX_GAP[freq], limit_area="inside")
     n_filled = int((filled.notna() & df.isna()).sum().sum())
+    filled = add_regional(filled)
     tag = {"D": "daily", "W": "weekly"}[freq]
     out = ROOT / "data" / f"midatlantic_tides_{tag}.csv"
     filled.round(4).to_csv(out)
