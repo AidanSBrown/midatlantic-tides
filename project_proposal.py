@@ -10,7 +10,7 @@ except ModuleNotFoundError:
     import importlib.util, tempfile, urllib.request
     from pathlib import Path
 
-    url = "https://github.com/AidanSBrown/midatlantic-tides/blob/main/functions.py" # This is meant to prevent errors if someone runs this file without having the functions.py file in the same directory. It will download it from the GitHub repo and import it.
+    url = "https://raw.githubusercontent.com/AidanSBrown/midatlantic-tides/refs/heads/main/functions.py" # This is meant to prevent errors if someone runs this file without having the functions.py file in the same directory. It will download it from the GitHub repo and import it.
     urllib.request.urlretrieve(url, path)
     spec = importlib.util.spec_from_file_location("functions", path)
     func = importlib.util.module_from_spec(spec)
@@ -54,6 +54,6 @@ func.ADF_Cal(dataset['msl_midatlantic'])
 func.KPSS_Cal(dataset['msl_midatlantic'])
 
 # Strength of trend and seasonality
-res = func.trend_season_strength(dataset["msl_midatlantic"], period=31)
+res = func.trend_season_strength(dataset["msl_midatlantic"], period=31) # We also need to specify period since endog is ndarray (https://www.statsmodels.org/devel/generated/statsmodels.tsa.seasonal.STL.html)
 res.plot()
 plt.show()
